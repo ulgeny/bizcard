@@ -190,9 +190,27 @@
     opacity: 0.9;
   }
 
-  .qr-note {
-    margin-top: 16px;
-    font-size: 0.75rem;
+  .qr-section {
+    width: 100%;
+    max-width: 380px;
+    margin: 16px auto 0;
+    background: var(--card-bg);
+    border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(60, 60, 120, 0.18);
+    padding: 20px;
+    text-align: center;
+  }
+
+  .qr-box {
+    display: inline-block;
+    padding: 12px;
+    background: #fff;
+    border-radius: 12px;
+  }
+
+  .qr-caption {
+    margin: 12px 0 0;
+    font-size: 0.8rem;
     color: var(--muted);
   }
 </style>
@@ -204,6 +222,13 @@
 <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
+  integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
+<script type="text/babel" src="src/components/QrCode.js"></script>
 
 <script type="text/babel" data-type="module">
 const { useState } = React;
@@ -335,16 +360,18 @@ function ProfileCard({ person }) {
           </button>
         </div>
 
-        <p className="qr-note">
-          Bu kartviziti paylaşmak için "Paylaş" butonunu kullanın veya sayfa linkini QR koda dönüştürün.
-        </p>
       </div>
     </div>
   );
 }
 
 function App() {
-  return <ProfileCard person={PERSON} />;
+  return (
+    <React.Fragment>
+      <ProfileCard person={PERSON} />
+      <QrCode value={window.location.href} />
+    </React.Fragment>
+  );
 }
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
