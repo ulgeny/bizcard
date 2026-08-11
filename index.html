@@ -190,6 +190,11 @@
     opacity: 0.9;
   }
 
+  .form-actions .btn {
+    font-size: 0.8rem;
+    padding: 12px 4px;
+  }
+
   .qr-section {
     width: 100%;
     max-width: 380px;
@@ -212,13 +217,6 @@
     margin: 12px 0 0;
     font-size: 0.8rem;
     color: var(--muted);
-  }
-
-  .form-heading {
-    margin: 0 0 12px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--text);
   }
 
   .card-form {
@@ -291,8 +289,7 @@
 ></script>
 <script src="src/config.js"></script>
 <script type="text/babel" src="src/components/QrCode.js"></script>
-<script type="text/babel" src="src/components/SaveCardForm.js"></script>
-<script type="text/babel" src="src/components/MeetingRequestForm.js"></script>
+<script type="text/babel" src="src/components/ContactForm.js"></script>
 
 <script type="text/babel" data-type="module">
 const { useState } = React;
@@ -427,11 +424,7 @@ function ProfileCard({ person }) {
 
         <div className="divider"></div>
 
-        <SaveCardForm card={{ id: person.id, name: person.name, url: window.location.href }} />
-
-        <div className="divider"></div>
-
-        <MeetingRequestForm card={{ id: person.id, name: person.name }} />
+        <ContactForm card={{ id: person.id, name: person.name, url: window.location.href }} />
 
       </div>
     </div>
