@@ -1,3 +1,11 @@
+function getTodayDateString() {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
 function ContactForm({ card }) {
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
@@ -13,8 +21,12 @@ function ContactForm({ card }) {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
       nextErrors.email = "Geçerli bir e-posta girin.";
     }
-    if (action === "meeting.request" && !date) {
-      nextErrors.date = "Bir tarih seçin.";
+    if (action === "meeting.request") {
+      if (!date) {
+        nextErrors.date = "Bir tarih seçin.";
+      } else if (date < getTodayDateString()) {
+        nextErrors.date = "Geçmiş bir tarih seçilemez.";
+      }
     }
     return nextErrors;
   }
@@ -87,6 +99,7 @@ function ContactForm({ card }) {
           id="contact-date"
           type="date"
           value={date}
+          min={getTodayDateString()}
           onChange={(event) => setDate(event.target.value)}
         />
         {errors.date && <span className="form-error">{errors.date}</span>}
