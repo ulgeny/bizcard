@@ -213,6 +213,60 @@
     font-size: 0.8rem;
     color: var(--muted);
   }
+
+  .save-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    text-align: left;
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-field label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--muted);
+  }
+
+  .form-field input {
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px solid #e2e2f0;
+    background: #f9f9fd;
+    font-size: 0.9rem;
+    color: var(--text);
+    font-family: inherit;
+  }
+
+  .form-field input:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: #fff;
+  }
+
+  .form-error {
+    font-size: 0.75rem;
+    color: #e5484d;
+  }
+
+  .form-status {
+    margin: 0;
+    font-size: 0.85rem;
+    text-align: center;
+  }
+
+  .form-status.success {
+    color: var(--accent-2);
+  }
+
+  .form-status.error {
+    color: #e5484d;
+  }
 </style>
 </head>
 <body>
@@ -229,11 +283,13 @@
   referrerpolicy="no-referrer"
 ></script>
 <script type="text/babel" src="src/components/QrCode.js"></script>
+<script type="text/babel" src="src/components/SaveCardForm.js"></script>
 
 <script type="text/babel" data-type="module">
 const { useState } = React;
 
 const PERSON = {
+  id: "ulgen-benli",
   name: "Ülgen Benli",
   title: "Makine Mühendisi, Mindfulness Eğitmeni",
   photoUrl: "https://via.placeholder.com/100x100.png?text=Foto",
@@ -359,6 +415,10 @@ function ProfileCard({ person }) {
             🔗 Paylaş
           </button>
         </div>
+
+        <div className="divider"></div>
+
+        <SaveCardForm card={{ id: person.id, name: person.name, url: window.location.href }} />
 
       </div>
     </div>
